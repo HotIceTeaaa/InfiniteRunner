@@ -1,21 +1,35 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputReader : MonoBehaviour
-{
-    [SerializeField] private InputActionAsset inputActionReference;
+namespace InfiniteRunner {
+    public class InputReader : MonoBehaviour {
 
-    [SerializeField] public bool isJumpKeyPressed;
+        [Header("Actions")]
+        [SerializeField] private InputActionReference _moveAction;
+        [SerializeField] private InputActionReference _jumpAction;
 
-    private InputAction jumpAction;
+        [Header("Script Lain")]
+        [SerializeField] private PlayerController _playerControllerScript;
+        
+        private void Update() {
+            if (_jumpAction.action.IsPressed()) {
+                _playerControllerScript.HandleJumpInput();
+            }
 
-    private void Awake()
-    {
-        jumpAction = inputActionReference.FindAction("Jump");
-    }
+            if (_moveAction.action.IsPressed()) {
+                Vector2 movement = _moveAction.action.ReadValue<Vector2>();
+                _playerControllerScript.HandleLaneInput(movement);
+            }
+        }
 
-    private void Update()
-    {
-        isJumpKeyPressed = jumpAction.IsPressed();
+        private void OnEnable() {
+            _moveAction.action.Enable();
+            _jumpAction.action.Enable();
+        }
+
+        private void OnDisable() {
+            _moveAction.action.Disable();
+            _jumpAction.action.Disable();
+        }
     }
 }
