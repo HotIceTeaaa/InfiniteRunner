@@ -53,7 +53,7 @@ namespace InfiniteRunner {
 
         public void HandleJumpInput() {
             if (_isGrounded) {
-                _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+                _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
             }
         }
 
