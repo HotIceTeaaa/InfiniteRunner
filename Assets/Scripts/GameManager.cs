@@ -2,14 +2,19 @@ using UnityEngine;
 
 namespace InfiniteRunner {
     public class GameManager : MonoBehaviour {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start() {
+        public static GameManager Instance { get; private set; }
+        public bool IsGameOver = false;
+        public float Speed = 0.5f;
+        
+        private void Awake() {
+            // Enforce the Singleton pattern
+            if (Instance != null && Instance != this) {
+                Destroy(gameObject);
+                return;
+            }
 
-        }
-
-        // Update is called once per frame
-        void Update() {
-
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }
