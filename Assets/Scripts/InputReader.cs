@@ -12,11 +12,11 @@ namespace InfiniteRunner {
         [SerializeField] private PlayerController _playerControllerScript;
         
         private void Update() {
-            if (_jumpAction.action.IsPressed()) {
+            if (_jumpAction.action.WasPressedThisFrame()) {
                 _playerControllerScript.HandleJumpInput();
             }
 
-            if (_moveAction.action.IsPressed()) {
+            if (_moveAction.action.WasPerformedThisFrame()) {
                 Vector2 movement = _moveAction.action.ReadValue<Vector2>();
                 _playerControllerScript.HandleLaneInput(movement);
             }

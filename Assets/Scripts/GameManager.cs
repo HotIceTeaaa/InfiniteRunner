@@ -1,13 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace InfiniteRunner {
     public class GameManager : MonoBehaviour {
         public static GameManager Instance { get; private set; }
-        public bool IsGameOver = false;
-        public float Speed = 0.5f;
-        
+
+        [SerializeField] private bool _isGameOver = false;
+        [SerializeField] private float _speed = 0.5f;
+
+        //[Header("Script Lain")]
+        //[SerializeField] private ;
+
+        public float Speed => _speed;
+        public bool IsGameOver => _isGameOver;
+
         private void Awake() {
-            // Enforce the Singleton pattern
             if (Instance != null && Instance != this) {
                 Destroy(gameObject);
                 return;
@@ -16,6 +23,23 @@ namespace InfiniteRunner {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        private void Update() {
+            if (!_isGameOver) {
+                return;
+            }
+        }
+
+        public void GameOver() {
+            if (!_isGameOver) {
+                return;
+            }
+
+            _isGameOver = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        }
+
     }
 }
 
