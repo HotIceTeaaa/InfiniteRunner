@@ -6,6 +6,7 @@ namespace InfiniteRunner
     {
         [Header("For Summoning Obsticles")]
         [SerializeField] private GameObject _obsticlePrefab;
+        [SerializeField] private GameObject[] _obsticles;
         [SerializeField] private float _spawnRate;
         [SerializeField] private float _spawnThreshold;
 
@@ -14,15 +15,7 @@ namespace InfiniteRunner
 
         void Start()
         {
-            // posisisnya:
-            // 0 1 2 
-            // 3 4 5
-            _spawnPositions[0] = new Vector3(-2.27999997f,4.09000015f,33.8600006f);
-            _spawnPositions[1] = new Vector3(0.115999997f,4.09000015f,33.8600006f);
-            _spawnPositions[2] = new Vector3(2.56900001f,4.09000015f,33.8600006f);
-            _spawnPositions[3] = new Vector3(-2.27999997f,2.33999991f,33.8600006f);
-            _spawnPositions[4] = new Vector3(0.115999997f,2.33999991f,33.8600006f);
-            _spawnPositions[5] = new Vector3(2.56900001f,2.33999991f,33.8600006f);
+            SetSpawnPositions();
         }
 
         void Update()
@@ -59,8 +52,9 @@ namespace InfiniteRunner
             {
                 if(spawnProbabilities[i] > _spawnThreshold)
                 {
-                    Debug.Log(_obsticlePrefab.name);
-                    Instantiate(_obsticlePrefab, _spawnPositions[i], Quaternion.identity);
+                    GameObject obsticle = Instantiate(_obsticlePrefab, _spawnPositions[i], Quaternion.identity);
+                    Destroy(obsticle, 10);
+
                 }
             }
         }
@@ -71,6 +65,14 @@ namespace InfiniteRunner
 
         private void DecrementTimer() {
             _currentTimer -= Time.deltaTime;
+        }
+
+        private void SetSpawnPositions() {
+            _spawnPositions = new Vector3[_obsticles.Length];
+
+            for (int i = 0; i < _obsticles.Length; i++) {
+                _spawnPositions[i] = _obsticles[i].transform.position;
+            }
         }
     }
 

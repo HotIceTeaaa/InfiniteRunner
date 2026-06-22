@@ -7,12 +7,18 @@ namespace InfiniteRunner {
 
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private float _speed = 0.5f;
-
-        //[Header("Script Lain")]
-        //[SerializeField] private ;
+        [SerializeField] private int _coinsCollectedThisRound = 0;
 
         public float Speed => _speed;
         public bool IsGameOver => _isGameOver;
+
+        private void OnEnable() {
+            Coins.OnCollect += CoinCollected;
+        }
+
+        private void OnDisable() {
+            Coins.OnCollect -= CoinCollected;
+        }
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -24,20 +30,22 @@ namespace InfiniteRunner {
             DontDestroyOnLoad(gameObject);
         }
 
-        private void Update() {
-            if (!_isGameOver) {
-                return;
-            }
+        private void Start() {
+            _isGameOver = false;
         }
 
         public void GameOver() {
-            if (!_isGameOver) {
+            if (_isGameOver) {
                 return;
             }
 
             _isGameOver = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+        }
+
+        private void CoinCollected() {
+            _coinsCollectedThisRound++;
         }
 
     }
