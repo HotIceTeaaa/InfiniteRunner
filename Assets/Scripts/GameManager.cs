@@ -27,7 +27,10 @@ namespace InfiniteRunner {
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            //pengennya di destroy on load
+            //krn pas GameOver() dipanggil, bakal reload scene, _isGameOver bakal di set false lagi
+            //DontDestroyOnLoad(gameObject);
         }
 
         private void Start() {
@@ -35,6 +38,8 @@ namespace InfiniteRunner {
         }
 
         public void GameOver() {
+            // _isGameOver g akan pernah true sebelom method ini dipanggil
+            // ini buat mastiin doang
             if (_isGameOver) {
                 return;
             }
