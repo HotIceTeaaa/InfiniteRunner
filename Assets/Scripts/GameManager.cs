@@ -35,6 +35,8 @@ namespace InfiniteRunner {
 
         private void Start() {
             _isGameOver = false;
+            BGMManager.Instance.PlayMainMenuBGM();
+            MainMenuUIManager.Instance.UpdateCoinCount();
         }
 
         public void GameOver() {
@@ -45,8 +47,17 @@ namespace InfiniteRunner {
             }
 
             _isGameOver = true;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SaveCollectedCoinsThisRound();
+            SceneHandler.Instance.LoadSceneByIndex(0);
+            BGMManager.Instance.PlayMainMenuBGM();
+            MainMenuUIManager.Instance.UpdateCoinCount();
+        }
 
+        private void SaveCollectedCoinsThisRound()
+        {
+            int coins = PlayerPreferences.Instance.getInt("coins", 0);
+            coins += _coinsCollectedThisRound;
+            PlayerPreferences.Instance.saveInt("coins", coins);
         }
 
         private void CoinCollected() {

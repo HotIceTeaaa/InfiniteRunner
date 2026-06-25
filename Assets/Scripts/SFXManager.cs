@@ -3,13 +3,14 @@ using UnityEngine;
 namespace InfiniteRunner
 {
     public class SFXManager : MonoBehaviour {
+        public static SFXManager Instance { get; private set; }
+        
         [SerializeField] private AudioSource _audioSource;
 
         [Header("CoinCollectSFX")]
         [SerializeField] private AudioClip _coinCollectSFX;
         [SerializeField] private float _pitchMultiplier;
         [SerializeField] private float _timeElapsedThreshold;
-        public static SFXManager Instance { get; private set; }
 
         private float _lastTimeCoinCollected = -999999f;
 
