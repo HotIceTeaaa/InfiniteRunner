@@ -26,7 +26,7 @@ namespace InfiniteRunner {
                 float spawnProbability = Random.value;
 
                 if (spawnProbability > _spawnThreshold) {
-                    int whichPowerup = Random.Range(0, 1);
+                    int whichPowerup = Random.Range(0, 2);
                     int whichLanes = Random.Range(0, _locations.Length);
 
                     GameObject powerUp = null;

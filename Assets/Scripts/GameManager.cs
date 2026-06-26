@@ -42,7 +42,11 @@ namespace InfiniteRunner {
 
         private void FixedUpdate() {
             if (PlayerStates.Instance._isGameStart) {
-                _score += _scoreIncrements * _scoreMultiplier;
+                if (PlayerStates.Instance._isScoreMultiplied) {
+                    _score += _scoreIncrements * _scoreMultiplier;
+                } else {
+                    _score += _scoreIncrements;
+                } 
             }
         }
 
