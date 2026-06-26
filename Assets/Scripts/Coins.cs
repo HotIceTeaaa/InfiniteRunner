@@ -14,7 +14,7 @@ namespace InfiniteRunner {
             }
         }
         private void Update() {
-            if (GameManager.Instance.IsGameOver) {
+            if (PlayerStates.Instance._isGameOver) {
                 return;
             }
 

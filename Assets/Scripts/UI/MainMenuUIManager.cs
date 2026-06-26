@@ -10,7 +10,6 @@ namespace InfiniteRunner
         public static MainMenuUIManager Instance { get; private set; }
 
         [SerializeField] private GameObject _tutorialPanel;
-        [SerializeField] private TMP_Text _coinAmountText;
 
         private void Awake() {
             // Enforce the Singleton pattern
@@ -23,9 +22,8 @@ namespace InfiniteRunner
             DontDestroyOnLoad(gameObject);
         }
 
-        public void UpdateCoinCount()
-        {
-            _coinAmountText.text = $"{PlayerPreferences.Instance.getInt("coins", -9999)}";
+        public void AssignTutorialPanel(GameObject newTutorialPanel) {
+            _tutorialPanel = newTutorialPanel;
         }
 
         public void OpenTutorialPanel()
@@ -40,8 +38,7 @@ namespace InfiniteRunner
 
         public void PlayButtonPressed()
         {
-            BGMManager.Instance.PlayGameplayBGM();
-            SceneHandler.Instance.LoadNextScene();
+            GameManager.Instance.GameStart();
         }
     }
 

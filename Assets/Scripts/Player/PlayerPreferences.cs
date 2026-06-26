@@ -43,5 +43,11 @@ namespace InfiniteRunner
             int coins = PlayerPrefs.GetInt("coins", -999);
             Debug.Log(coins);
         }
+
+        [ContextMenu("Print HighScore")]
+        public void PrintHighScore() {
+            float hs = PlayerPrefs.GetFloat("highScore", -999);
+            Debug.Log(hs);
+        }
     }
 }

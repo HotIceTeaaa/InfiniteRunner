@@ -5,7 +5,7 @@ namespace InfiniteRunner
     public class Obsticles : MonoBehaviour
     {
         private void Update(){
-            if (GameManager.Instance.IsGameOver)
+            if (PlayerStates.Instance._isGameOver)
             {
                 return;
             }

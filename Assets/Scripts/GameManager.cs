@@ -5,12 +5,21 @@ namespace InfiniteRunner {
     public class GameManager : MonoBehaviour {
         public static GameManager Instance { get; private set; }
 
-        [SerializeField] private bool _isGameOver = false;
+        [Header("Score Related")]
+        [SerializeField] private float _score = 0;
+        [SerializeField] private float _scoreIncrements = 100f;
+        [SerializeField] private float _scoreMultiplier = 1f;
+
+        [Header("Others")]
         [SerializeField] private float _speed = 0.5f;
-        [SerializeField] private int _coinsCollectedThisRound = 0;
 
         public float Speed => _speed;
-        public bool IsGameOver => _isGameOver;
+        public float Score => _score;
+
+        public int coinsCollectedThisRound = 0;
+
+        private float _highScore = -9999;
+
 
         private void OnEnable() {
             Coins.OnCollect += CoinCollected;
@@ -28,40 +37,63 @@ namespace InfiniteRunner {
 
             Instance = this;
 
-            //pengennya di destroy on load
-            //krn pas GameOver() dipanggil, bakal reload scene, _isGameOver bakal di set false lagi
             //DontDestroyOnLoad(gameObject);
         }
 
-        private void Start() {
-            _isGameOver = false;
-            BGMManager.Instance.PlayMainMenuBGM();
-            MainMenuUIManager.Instance.UpdateCoinCount();
+        private void FixedUpdate() {
+            if (PlayerStates.Instance._isGameStart) {
+                _score += _scoreIncrements * _scoreMultiplier;
+            }
+        }
+
+        public void GameStart() {
+            PlayerStates.Instance._isGameOver = false;
+            PlayerStates.Instance._isGameStart = true;
+
+            BGMManager.Instance.PlayGameplayBGM();
+            SceneHandler.Instance.LoadNextScene();
         }
 
         public void GameOver() {
             // _isGameOver g akan pernah true sebelom method ini dipanggil
             // ini buat mastiin doang
-            if (_isGameOver) {
+            if (PlayerStates.Instance._isGameOver) {
                 return;
             }
 
-            _isGameOver = true;
+            PlayerStates.Instance._isGameOver = true;
+            PlayerStates.Instance._isGameStart = false;
+
             SaveCollectedCoinsThisRound();
+            UpdateHighScore();
+
+            ToMainMenu();
+        }
+
+        public void ToMainMenu() {
+            PlayerStates.Instance._isGameOver = false;
+            PlayerStates.Instance._isGameStart = false;
+
             SceneHandler.Instance.LoadSceneByIndex(0);
             BGMManager.Instance.PlayMainMenuBGM();
-            MainMenuUIManager.Instance.UpdateCoinCount();
         }
 
         private void SaveCollectedCoinsThisRound()
         {
             int coins = PlayerPreferences.Instance.getInt("coins", 0);
-            coins += _coinsCollectedThisRound;
+            coins += coinsCollectedThisRound;
             PlayerPreferences.Instance.saveInt("coins", coins);
         }
 
+        private void UpdateHighScore() {
+            if (_score > _highScore) {
+                _highScore = _score;
+                PlayerPreferences.Instance.saveFloat("highScore", _highScore);
+            }
+        }
+
         private void CoinCollected() {
-            _coinsCollectedThisRound++;
+            coinsCollectedThisRound++;
         }
 
     }

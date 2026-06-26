@@ -6,7 +6,7 @@ namespace InfiniteRunner
     {
         [Header("For Summoning Obsticles")]
         [SerializeField] private GameObject _obsticlePrefab;
-        [SerializeField] private GameObject[] _obsticles;
+        [SerializeField] private GameObject[] _locations;
         [SerializeField] private float _spawnRate;
         [SerializeField] private float _spawnThreshold;
 
@@ -38,12 +38,15 @@ namespace InfiniteRunner
             }
 
             //make sure obsticlesnya bs dilewatin
-            //kalo posisi 0 1 2 diatas spawn threshold, ilangin salah satu 
+            //kalo semua posisi diatas spawn threshold, ilangin salah satu 
             if (spawnProbabilities[0] > _spawnThreshold &&
                 spawnProbabilities[1] > _spawnThreshold &&
-                spawnProbabilities[2] > _spawnThreshold)
+                spawnProbabilities[2] > _spawnThreshold &&
+                spawnProbabilities[3] > _spawnThreshold &&
+                spawnProbabilities[4] > _spawnThreshold &&
+                spawnProbabilities[5] > _spawnThreshold)
             {
-                int i = Random.Range(0, 3);
+                int i = Random.Range(0, spawnProbabilities.Length);
                 spawnProbabilities[i] = 0f;
             }
 
@@ -68,10 +71,10 @@ namespace InfiniteRunner
         }
 
         private void SetSpawnPositions() {
-            _spawnPositions = new Vector3[_obsticles.Length];
+            _spawnPositions = new Vector3[_locations.Length];
 
-            for (int i = 0; i < _obsticles.Length; i++) {
-                _spawnPositions[i] = _obsticles[i].transform.position;
+            for (int i = 0; i < _locations.Length; i++) {
+                _spawnPositions[i] = _locations[i].transform.position;
             }
         }
     }

@@ -4,14 +4,23 @@ using UnityEngine.InputSystem;
 
 namespace InfiniteRunner {
     public class PlayerController : MonoBehaviour {
+
+        [Header("Changing Lanes Related")]
         [SerializeField] private float _laneDistance = 3f;
         [SerializeField] private float _laneChangeSpeed = 10f;
-        [SerializeField] private float _jumpForce = 7f;
-        [SerializeField] private float _groundCheckDistance = 1.1f;
-
-        [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _moveThreshold = 0.5f;
 
+        [Header("Jump Related")]
+        [SerializeField] private float _jumpForce = 7f;
+        [SerializeField] private float _groundCheckDistance = 1.1f;
+        [SerializeField] private LayerMask _groundLayer;
+
+        [Header("Slide Related")]
+        [SerializeField] private CapsuleCollider _playerCollider;
+        [SerializeField] private float _currentTimer;
+        [SerializeField] private float _slideDuration;
+
+        [Header("Other")]
         [SerializeField] private Animator _animator;
 
         private Rigidbody _rigidbody;
@@ -20,21 +29,38 @@ namespace InfiniteRunner {
         private bool _isGrounded;
         private bool _moveHeld;   // was the stick pushed sideways last frame?
 
-        // untuk animasi
-        private bool _isJumping = false;
+        // untuk ukuran collider pas sliding/berdiri
+        private float _yStanding = 0.23f;
+        private float _ySliding = 0.11f;
+        private float _heightStanding = 0.48f;
+        private float _heightSliding = 0.24f;
 
         private void Awake() {
             _rigidbody = GetComponent<Rigidbody>();
+            ResetTimer();
         }
 
         private void FixedUpdate() {
-            if (GameManager.Instance.IsGameOver) {  
+            if (PlayerStates.Instance._isGameOver) {  
                 return;
             }
 
             CheckGrounded();
             MoveToLane();
-            
+        }
+
+        private void Update() {
+            if (PlayerStates.Instance._isSliding) {
+                DecrementTimer();
+
+                if (_currentTimer < 0f) {
+                    PlayerStates.Instance._isSliding = false;
+                    _animator.SetBool("SlideBool", false);
+
+                    ResetTimer();
+                    SetColliderToRun();
+                }
+            }
         }
 
         public void HandleLaneInput(Vector2 movementInput) {
@@ -63,15 +89,23 @@ namespace InfiniteRunner {
             if (_isGrounded) 
             {
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-                _isJumping = true;
+                PlayerStates.Instance._isJumping = true;
                 _animator.SetBool("JumpBool", true);
+            }
+        }
+        public void HandleSlideInput() {
+            if (_isGrounded) {
+                SetColliderToSlide();
+
+                PlayerStates.Instance._isSliding = true;
+                _animator.SetBool("SlideBool", true);
             }
         }
         private void CheckGrounded() {
             _isGrounded = Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, _groundLayer);
 
-            if(_isGrounded && _isJumping) {
-                _isJumping = false;
+            if(_isGrounded && PlayerStates.Instance._isJumping) {
+                PlayerStates.Instance._isJumping = false;
                 _animator.SetBool("JumpBool", false);
             }
         }
@@ -86,6 +120,28 @@ namespace InfiniteRunner {
             {
                 _animator.SetInteger("MoveDirection", 0);
             }
+        }
+
+        private void ResetTimer() {
+            _currentTimer = _slideDuration;
+        }
+
+        private void DecrementTimer() {
+            _currentTimer -= Time.deltaTime;
+        }
+
+        //urutannya HARUS height baru center
+        private void SetColliderToSlide() {
+            _playerCollider.height = _heightSliding;
+            _playerCollider.center = new Vector3(0, _ySliding, 0);
+            
+        }
+
+        //urutannya HARUS height baru center
+        private void SetColliderToRun() {
+            _playerCollider.height = _heightStanding;
+            _playerCollider.center = new Vector3(0, _yStanding, 0);
+            
         }
     }
 }

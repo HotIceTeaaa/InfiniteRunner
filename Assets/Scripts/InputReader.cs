@@ -7,6 +7,7 @@ namespace InfiniteRunner {
         [Header("Actions")]
         [SerializeField] private InputActionReference _moveAction;
         [SerializeField] private InputActionReference _jumpAction;
+        [SerializeField] private InputActionReference _slideAction;
 
         [Header("Script Lain")]
         [SerializeField] private PlayerController _playerControllerScript;
@@ -20,16 +21,22 @@ namespace InfiniteRunner {
                 Vector2 movement = _moveAction.action.ReadValue<Vector2>();
                 _playerControllerScript.HandleLaneInput(movement);
             }
+
+            if (_slideAction.action.WasPerformedThisFrame()) {
+                _playerControllerScript.HandleSlideInput();
+            }
         }
 
         private void OnEnable() {
             _moveAction.action.Enable();
             _jumpAction.action.Enable();
+            _slideAction.action.Enable();
         }
 
         private void OnDisable() {
             _moveAction.action.Disable();
             _jumpAction.action.Disable();
+            _slideAction.action.Disable();
         }
     }
 }

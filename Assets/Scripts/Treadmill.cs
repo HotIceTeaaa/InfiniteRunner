@@ -7,9 +7,12 @@ namespace InfiniteRunner {
         [SerializeField] private int _tileCount = 4;      // how many tiles are in the loop
         [SerializeField] private float _recycleZ = -20f;  // once past this Z, jump to the front
 
+        [SerializeField] private TileVariantHandler _tileVariantHandler;
+
+
         private void Update()
         {
-            if (GameManager.Instance.IsGameOver)
+            if (PlayerStates.Instance._isGameOver)
             {
                 return;
             }
@@ -19,8 +22,11 @@ namespace InfiniteRunner {
 
             if (transform.position.z < _recycleZ)
             {
+                _tileVariantHandler.CheckTileHandler();
+
                 // Jump exactly one full loop ahead so the strip stays seamless.
                 transform.position += Vector3.forward * (_tileLength * _tileCount);
+
             }
         }
     }

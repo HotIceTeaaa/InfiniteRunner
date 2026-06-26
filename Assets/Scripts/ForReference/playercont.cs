@@ -36,7 +36,7 @@ namespace EndlessRunner {
         }
 
         private void Update() {
-            if (GameManager.Instance.IsGameOver) {
+            if (PlayerStates.Instance._isGameOver) {
                 return;
             }
 
@@ -45,7 +45,7 @@ namespace EndlessRunner {
         }
 
         private void FixedUpdate() {
-            if (GameManager.Instance.IsGameOver) {
+            if (PlayerStates.Instance._isGameOver) {
                 return;
             }
 
