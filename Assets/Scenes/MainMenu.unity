@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteRunner.GameManager
   _score: 0
-  _scoreIncrements: 100
-  _scoreMultiplier: 1
+  _scoreIncrements: 10
+  _scoreMultiplier: 2
   _speed: 8
   coinsCollectedThisRound: 0
 --- !u!4 &14907606
@@ -2840,10 +2840,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "- The goal of this game is to survive as long as possible. \n- When playing,
-    obsticles will spawn. Obsticle instantly kill you. Press A and D to evade.\n-
-    Sometimes, a shield power up will appear. A shield allows you to tank one hit,
-    then it will disappear. \n- You can increase the chances of a shield appearing
-    by upgrading it"
+    obsticles will spawn. They instantly kill you\n- Press A and D to evade. Press
+    S to duck. Press space to jump.\n- Sometimes, a shield power up will appear.
+    A shield allows you to tank one hit, then it will disappear. This ability last
+    for 30 seconds.\n- Sometimes, a 2x score multiplier will appear. This will double
+    your score for 30 seconds. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

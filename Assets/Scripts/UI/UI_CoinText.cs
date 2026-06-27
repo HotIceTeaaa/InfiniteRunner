@@ -6,7 +6,7 @@ namespace InfiniteRunner {
         [SerializeField] private TMP_Text _coinAmountText;
 
         private void Start() {
-            _coinAmountText.text = $"{PlayerPreferences.Instance.getInt("coins", -9999)}";
+            _coinAmountText.text = $"{PlayerPreferences.Instance.getInt("coins", 0)}";
         }
     
     }

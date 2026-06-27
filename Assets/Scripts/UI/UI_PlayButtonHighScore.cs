@@ -6,7 +6,7 @@ namespace InfiniteRunner {
         [SerializeField] private TMP_Text _playButtonText;
 
         private void Start() {
-            _playButtonText.text = $"Play       High Score: {PlayerPreferences.Instance.getFloat("highScore", -9999)}";
+            _playButtonText.text = $"Play       High Score: {PlayerPreferences.Instance.getFloat("highScore", 0)}";
         }
 
     }

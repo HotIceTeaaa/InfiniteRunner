@@ -8411,7 +8411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740580023}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b80bc91098e42f419423e8b2c3c3a08, type: 3}
   m_Name: 
@@ -16102,7 +16102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373861475}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b80bc91098e42f419423e8b2c3c3a08, type: 3}
   m_Name: 
@@ -18993,7 +18993,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601690449}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b80bc91098e42f419423e8b2c3c3a08, type: 3}
   m_Name: 
@@ -19309,7 +19309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621960355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b80bc91098e42f419423e8b2c3c3a08, type: 3}
   m_Name: 
@@ -22081,7 +22081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteRunner.GameManager
   _score: 0
-  _scoreIncrements: 100
+  _scoreIncrements: 10
   _scoreMultiplier: 2
   _speed: 8
   coinsCollectedThisRound: 0
@@ -23270,8 +23270,8 @@ MonoBehaviour:
   - {fileID: 115928311}
   - {fileID: 1373370476}
   - {fileID: 2133326922}
-  _spawnRate: 1
-  _spawnThreshold: 0.1
+  _spawnRate: 30
+  _spawnThreshold: 0.3
 --- !u!4 &1960313900
 Transform:
   m_ObjectHideFlags: 0
