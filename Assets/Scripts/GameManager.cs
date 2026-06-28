@@ -38,6 +38,7 @@ namespace InfiniteRunner {
             Instance = this;
 
             //DontDestroyOnLoad(gameObject);
+            GameStart();
         }
 
         private void FixedUpdate() {
@@ -55,7 +56,6 @@ namespace InfiniteRunner {
             PlayerStates.Instance._isGameStart = true;
 
             BGMManager.Instance.PlayGameplayBGM();
-            SceneHandler.Instance.LoadNextScene();
         }
 
         public void GameOver() {

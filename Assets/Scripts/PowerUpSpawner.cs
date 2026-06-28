@@ -7,50 +7,76 @@ namespace InfiniteRunner {
         [SerializeField] private GameObject _scoreMultiplierPrefab;
         [SerializeField] private GameObject[] _locations;
 
-        [SerializeField] private float _spawnRate;
-        [SerializeField] private float _spawnThreshold;
-
-        private float _currentTimer;
-
         void Update() {
-            DecrementTimer();
+            HandleShieldSpawn();
+            HandleShieldDuration();
+            
+            HandleScoreMultiplierSpawn();
+            HandleScoreMultiplierDuration();
+        }
 
-            if (_currentTimer < 0) {
-                SpawnPowerUp();
-                ResetTimer();
+        private void HandleShieldSpawn()
+        {
+            PlayerStates.Instance._shieldSpawnAttemptCooldown -= Time.deltaTime;
+
+            if(PlayerStates.Instance._shieldSpawnAttemptCooldown <= 0f)
+            {
+                float spawnProbability = Random.value;
+                if (spawnProbability < PlayerStates.Instance._shieldSpawnThreshold) 
+                {
+                    int whichLanes = Random.Range(0, _locations.Length);
+
+                    GameObject powerUp = Instantiate(_shieldPrefab, _locations[whichLanes].transform.position, Quaternion.identity);
+                    Destroy(powerUp, 10);
+                }
+                
+                //Reset timer
+                PlayerStates.Instance._shieldSpawnAttemptCooldown = PlayerStates.Instance._shieldSpawnAttemptRate;
             }
         }
 
-        private void SpawnPowerUp() {
-            for (int i = 0; i < _locations.Length; i++) {
-                float spawnProbability = Random.value;
-
-                if (spawnProbability > _spawnThreshold) {
-                    int whichPowerup = Random.Range(0, 2);
-                    int whichLanes = Random.Range(0, _locations.Length);
-
-                    GameObject powerUp = null;
-
-                    switch (whichPowerup) {
-                        case 0:
-                            powerUp = Instantiate(_shieldPrefab, _locations[whichLanes].transform.position, Quaternion.identity);
-                            break;
-                        case 1:
-                            powerUp = Instantiate(_scoreMultiplierPrefab, _locations[whichLanes].transform.position, Quaternion.identity);
-                            break;
-                    }
-                    
-                    Destroy(powerUp, 10);
+        private void HandleShieldDuration()
+        {
+            if (PlayerStates.Instance._isShielded) {
+                if (PlayerStates.Instance._shieldDurationLeft < 0f) {
+                    PlayerStates.Instance._isShielded = false;
+                    PlayerStates.Instance._shieldDurationLeft = PlayerStates.Instance._shieldDuration;
+                } else {
+                    PlayerStates.Instance._shieldDurationLeft -= Time.deltaTime;
                 }
             }
         }
 
-        private void ResetTimer() {
-            _currentTimer = _spawnRate;
+        private void HandleScoreMultiplierSpawn()
+        {
+            PlayerStates.Instance._scoreMultiplierSpawnAttemptCooldown -= Time.deltaTime;
+
+            if(PlayerStates.Instance._scoreMultiplierSpawnAttemptCooldown <= 0f)
+            {
+                float spawnProbability = Random.value;
+                if (spawnProbability < PlayerStates.Instance._scoreMultiplierSpawnThreshold) 
+                {
+                    int whichLanes = Random.Range(0, _locations.Length);
+
+                    GameObject powerUp = Instantiate(_scoreMultiplierPrefab, _locations[whichLanes].transform.position, Quaternion.identity);
+                    Destroy(powerUp, 10);
+                }
+                
+                //Reset timer
+                PlayerStates.Instance._scoreMultiplierSpawnAttemptCooldown = PlayerStates.Instance._scoreMultiplierSpawnAttemptRate;
+            }
         }
 
-        private void DecrementTimer() {
-            _currentTimer -= Time.deltaTime;
+        private void HandleScoreMultiplierDuration()
+        {
+            if (PlayerStates.Instance._isScoreMultiplied) {
+                if (PlayerStates.Instance._scoreMultiplierDurationLeft < 0f) {
+                    PlayerStates.Instance._isScoreMultiplied = false;
+                    PlayerStates.Instance._scoreMultiplierDurationLeft = PlayerStates.Instance._scoreMultiplierDuration;
+                } else {
+                    PlayerStates.Instance._scoreMultiplierDurationLeft -= Time.deltaTime;
+                }
+            }
         }
     }
 

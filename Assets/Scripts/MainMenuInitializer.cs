@@ -1,3 +1,4 @@
+/*
 using InfiniteRunner;
 using UnityEngine;
 
@@ -12,3 +13,4 @@ public class MainMenuInitializer : MonoBehaviour
         _tutorialButton.Initialize();
     }
 }
+*/

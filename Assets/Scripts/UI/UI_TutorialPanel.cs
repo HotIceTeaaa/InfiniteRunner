@@ -1,3 +1,4 @@
+/*
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,3 +17,5 @@ namespace InfiniteRunner {
     }
 
 }
+
+*/

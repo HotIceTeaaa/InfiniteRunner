@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace InfiniteRunner {
     public class Shield : MonoBehaviour {
-        [SerializeField] private float _duration;
 
         private void Update() {
             if (PlayerStates.Instance._isGameOver) {
@@ -15,9 +14,7 @@ namespace InfiniteRunner {
 
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.CompareTag("Player")) {
-
                 PlayerStates.Instance._isShielded = true;
-                PlayerStates.Instance._shieldDurationLeft = _duration;
 
                 Destroy(gameObject);
             }

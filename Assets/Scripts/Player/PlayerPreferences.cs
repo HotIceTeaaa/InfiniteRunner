@@ -49,5 +49,17 @@ namespace InfiniteRunner
             float hs = PlayerPrefs.GetFloat("highScore", -999);
             Debug.Log(hs);
         }
+
+        [ContextMenu("Print Shield level")]
+        public void PrintShieldLevel() {
+            float lvl = PlayerPrefs.GetInt("shieldLevel", 1);
+            Debug.Log(lvl);
+        }
+
+        [ContextMenu("Print score multiplier level")]
+        public void PrintScoreMultiplier() {
+            float lvl = PlayerPrefs.GetInt("scoreMultiplierLevel", 1);
+            Debug.Log(lvl);
+        }
     }
 }
