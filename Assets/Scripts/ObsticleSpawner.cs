@@ -5,8 +5,12 @@ namespace InfiniteRunner
     public class ObsticleSpawner : MonoBehaviour
     {
         [Header("For Summoning Obsticles")]
-        [SerializeField] private GameObject _obsticlePrefab;
+        [SerializeField] private GameObject _floatingObsticlePrefab;
+        [SerializeField] private GameObject _shortObsticlePrefab;
+        [SerializeField] private GameObject _tallObsticlePrefab;
+
         [SerializeField] private GameObject[] _locations;
+
         [SerializeField] private float _spawnRate;
         [SerializeField] private float _spawnThreshold;
 
@@ -51,13 +55,26 @@ namespace InfiniteRunner
             }
 
             //mulai instantiate obsticlesnya
-            for(int i = 0; i < spawnProbabilities.Length; i++)
+            //index mulai dari atas ke bawah
+            for(int i = spawnProbabilities.Length - 1; i >= 0; i--)
             {
-                if(spawnProbabilities[i] > _spawnThreshold)
-                {
-                    GameObject obsticle = Instantiate(_obsticlePrefab, _spawnPositions[i], Quaternion.identity);
-                    Destroy(obsticle, 10);
+                if (spawnProbabilities[i] > _spawnThreshold) {
+                    //handle obsticle yang bottom sama top halfnya bisa jadi obsticle
+                    if (i >= 3 && spawnProbabilities[i - 3] > _spawnThreshold) {
+                        GameObject obs = Instantiate(_tallObsticlePrefab, _spawnPositions[i], Quaternion.identity);
+                        spawnProbabilities[i - 3] = 0;
+                        Destroy(obs, 10);
 
+                    //handle obsticle yang bottom halfnya doang bisa jadi obsticle
+                    } else if (i >= 3) {
+                        GameObject obs = Instantiate(_shortObsticlePrefab, _spawnPositions[i], Quaternion.identity);
+                        Destroy(obs, 10);
+
+                    //handle obsticle yang top halfnya doang bisa jadi obsticle
+                    } else {
+                        GameObject obs = Instantiate(_floatingObsticlePrefab, _spawnPositions[i], Quaternion.identity);
+                        Destroy(obs, 10);
+                    }
                 }
             }
         }

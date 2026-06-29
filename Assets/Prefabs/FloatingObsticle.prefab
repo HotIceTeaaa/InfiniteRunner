@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 592440995375880397}
   - component: {fileID: 7837162122810367643}
   m_Layer: 0
-  m_Name: Obsticles
+  m_Name: FloatingObsticle
   m_TagString: Obsticles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4242637, y: 1.9999999, z: 2.4242637}
+  m_Size: {x: 2.4242637, y: 1.9999999, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7837162122810367643
 MonoBehaviour:

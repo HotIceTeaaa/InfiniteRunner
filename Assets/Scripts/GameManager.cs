@@ -10,8 +10,11 @@ namespace InfiniteRunner {
         [SerializeField] private float _scoreIncrements = 100f;
         [SerializeField] private float _scoreMultiplier = 1f;
 
-        [Header("Others")]
-        [SerializeField] private float _speed = 0.5f;
+        [Header("Speed Related")]
+        [SerializeField] private float _speed = 8f;
+        [SerializeField] private float _increaseSpeedBy = 0.1f;
+        [SerializeField] private int _increaseSpeedCount = 0;
+        [SerializeField] private int _increaseSpeedEveryScore = 10000;
 
         public float Speed => _speed;
         public float Score => _score;
@@ -42,13 +45,8 @@ namespace InfiniteRunner {
         }
 
         private void FixedUpdate() {
-            if (PlayerStates.Instance._isGameStart) {
-                if (PlayerStates.Instance._isScoreMultiplied) {
-                    _score += _scoreIncrements * _scoreMultiplier;
-                } else {
-                    _score += _scoreIncrements;
-                } 
-            }
+            HandleScoreIncrease();
+            HandleSpeedIncrease();
         }
 
         public void GameStart() {
@@ -88,18 +86,34 @@ namespace InfiniteRunner {
             coins += coinsCollectedThisRound;
             PlayerPreferences.Instance.saveInt("coins", coins);
         }
-
         private void UpdateHighScore() {
             if (_score > _highScore) {
                 _highScore = _score;
                 PlayerPreferences.Instance.saveFloat("highScore", _highScore);
             }
         }
-
         private void CoinCollected() {
             coinsCollectedThisRound++;
         }
 
+        private void HandleSpeedIncrease() {
+            int result = Mathf.FloorToInt(_score / _increaseSpeedEveryScore);
+            
+            if(result > _increaseSpeedCount) {
+                _increaseSpeedCount = result;
+                _speed += _increaseSpeedBy;
+            }
+        }
+
+        private void HandleScoreIncrease() {
+            if (PlayerStates.Instance._isGameStart) {
+                if (PlayerStates.Instance._isScoreMultiplied) {
+                    _score += _scoreIncrements * _scoreMultiplier;
+                } else {
+                    _score += _scoreIncrements;
+                }
+            }
+        }
     }
 }
 

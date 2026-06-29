@@ -53,8 +53,8 @@ namespace InfiniteRunner {
             {
                 case 1:
                     _shieldDuration = 10;
-                    _shieldSpawnThreshold = 0.1f;
-                    _shieldSpawnAttemptRate = 10;
+                    _shieldSpawnThreshold = 0.9f;
+                    _shieldSpawnAttemptRate = 1;
                     break;
                 case 2:
                     _shieldDuration = 20;

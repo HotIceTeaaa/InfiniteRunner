@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 namespace InfiniteRunner {
     public class PowerUpSpawner : MonoBehaviour {
@@ -6,6 +9,9 @@ namespace InfiniteRunner {
         [SerializeField] private GameObject _shieldPrefab;
         [SerializeField] private GameObject _scoreMultiplierPrefab;
         [SerializeField] private GameObject[] _locations;
+
+        public static event Action OnShieldLoss;
+        public static event Action OnScoreMultiplierLoss;
 
         void Update() {
             HandleShieldSpawn();
