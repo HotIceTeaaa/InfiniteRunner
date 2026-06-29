@@ -4,16 +4,12 @@ namespace InfiniteRunner
 {
     public class ShieldIndicator : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
+        [SerializeField] private Animator _animator;
+
+        private void OnEnable() {
+            
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+
     }
 }
