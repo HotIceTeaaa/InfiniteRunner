@@ -10,9 +10,6 @@ namespace InfiniteRunner {
         [SerializeField] private GameObject _scoreMultiplierPrefab;
         [SerializeField] private GameObject[] _locations;
 
-        public static event Action OnShieldLoss;
-        public static event Action OnScoreMultiplierLoss;
-
         void Update() {
             HandleShieldSpawn();
             HandleShieldDuration();
@@ -44,9 +41,11 @@ namespace InfiniteRunner {
         private void HandleShieldDuration()
         {
             if (PlayerStates.Instance._isShielded) {
-                if (PlayerStates.Instance._shieldDurationLeft < 0f) {
+                if (PlayerStates.Instance._shieldDurationLeft <= 0f) {
                     PlayerStates.Instance._isShielded = false;
-                    PlayerStates.Instance._shieldDurationLeft = PlayerStates.Instance._shieldDuration;
+                    PlayerStates.Instance._shieldDurationLeft = 0;
+
+                    EventManagers.Instance.InvokeOnShieldLoss();
                 } else {
                     PlayerStates.Instance._shieldDurationLeft -= Time.deltaTime;
                 }
@@ -76,9 +75,11 @@ namespace InfiniteRunner {
         private void HandleScoreMultiplierDuration()
         {
             if (PlayerStates.Instance._isScoreMultiplied) {
-                if (PlayerStates.Instance._scoreMultiplierDurationLeft < 0f) {
+                if (PlayerStates.Instance._scoreMultiplierDurationLeft <= 0f) {
                     PlayerStates.Instance._isScoreMultiplied = false;
-                    PlayerStates.Instance._scoreMultiplierDurationLeft = PlayerStates.Instance._scoreMultiplierDuration;
+                    PlayerStates.Instance._scoreMultiplierDurationLeft = 0;
+
+                    EventManagers.Instance.InvokeOnScoreMultiplierLoss();
                 } else {
                     PlayerStates.Instance._scoreMultiplierDurationLeft -= Time.deltaTime;
                 }

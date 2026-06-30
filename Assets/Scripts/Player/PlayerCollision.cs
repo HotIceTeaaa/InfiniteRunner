@@ -9,6 +9,8 @@ namespace InfiniteRunner {
                     PlayerStates.Instance._isShielded = false;
                     PlayerStates.Instance._shieldDurationLeft = 0f;
 
+                    EventManagers.Instance.InvokeOnShieldLoss();
+
                     Destroy(other.gameObject);
                 } else {
                     GameManager.Instance.GameOver();

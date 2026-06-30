@@ -4,8 +4,6 @@ using UnityEngine;
 namespace InfiniteRunner {
     public class Shield : MonoBehaviour {
 
-        public static event Action OnShieldCollect;
-
         private void Update() {
             if (PlayerStates.Instance._isGameOver) {
                 return;
@@ -17,7 +15,7 @@ namespace InfiniteRunner {
 
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.CompareTag("Player")) {
-                OnShieldCollect.Invoke();
+                EventManagers.Instance.InvokeOnShieldCollect();
 
                 PlayerStates.Instance._isShielded = true;
                 PlayerStates.Instance._shieldDurationLeft = PlayerStates.Instance._shieldDuration;

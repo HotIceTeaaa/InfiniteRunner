@@ -20,7 +20,7 @@ namespace InfiniteRunner {
         public float _shieldSpawnAttemptRate;
         public float _shieldSpawnAttemptCooldown;
 
-        [Header("2x Score Multiplier Powerup Related")]
+        [Header("Score Multiplier Powerup Related")]
         public bool _isScoreMultiplied = false;
         public float _scoreMultiplierDurationLeft = 0f;
         public float _scoreMultiplierDuration;
@@ -53,8 +53,8 @@ namespace InfiniteRunner {
             {
                 case 1:
                     _shieldDuration = 10;
-                    _shieldSpawnThreshold = 0.9f;
-                    _shieldSpawnAttemptRate = 1;
+                    _shieldSpawnThreshold = 0.1f;
+                    _shieldSpawnAttemptRate = 10;
                     break;
                 case 2:
                     _shieldDuration = 20;
@@ -89,6 +89,23 @@ namespace InfiniteRunner {
                     _scoreMultiplierSpawnAttemptRate = 8;
                     break;
             }
+        }
+
+        //dipanggil GameManager setelah game over
+        //game state g di uabh krn udh diubah sama game manager
+        //duration, spawn trehshold sama attempt rate g di reset krn udh sama initPowerUpInfo()
+        public void ResetPlayerStates()
+        {
+            _isJumping = false;
+            _isSliding = false;
+
+            _isShielded = false;
+            _shieldDurationLeft = 0;
+            _shieldSpawnAttemptCooldown = _shieldSpawnAttemptRate;
+
+            _isScoreMultiplied = false;
+            _scoreMultiplierDurationLeft = 0;
+            _scoreMultiplierSpawnAttemptCooldown = _scoreMultiplierSpawnAttemptRate;
         }
     }
 }

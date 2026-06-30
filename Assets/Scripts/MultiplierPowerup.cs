@@ -4,8 +4,6 @@ using UnityEngine;
 namespace InfiniteRunner {
     public class MultiplierPowerup : MonoBehaviour {
 
-        public static event Action OnScoreMultiplierCollect;
-
         private void Update() {
             if (PlayerStates.Instance._isGameOver) {
                 return;
@@ -17,7 +15,7 @@ namespace InfiniteRunner {
 
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.CompareTag("Player")) {
-                OnScoreMultiplierCollect.Invoke();
+                EventManagers.Instance.InvokeOnScoreMultiplierCollect();
 
                 PlayerStates.Instance._isScoreMultiplied = true;
                 PlayerStates.Instance._scoreMultiplierDurationLeft = PlayerStates.Instance._scoreMultiplierDuration;

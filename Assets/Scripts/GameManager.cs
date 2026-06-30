@@ -44,6 +44,11 @@ namespace InfiniteRunner {
             GameStart();
         }
 
+        void Start()
+        {
+            _highScore = PlayerPreferences.Instance.getFloat("highScore", 0f);
+        }
+
         private void FixedUpdate() {
             HandleScoreIncrease();
             HandleSpeedIncrease();
@@ -65,6 +70,8 @@ namespace InfiniteRunner {
 
             PlayerStates.Instance._isGameOver = true;
             PlayerStates.Instance._isGameStart = false;
+
+            PlayerStates.Instance.ResetPlayerStates();
 
             SaveCollectedCoinsThisRound();
             UpdateHighScore();
