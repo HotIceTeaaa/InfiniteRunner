@@ -46,6 +46,7 @@ namespace InfiniteRunner {
                     PlayerStates.Instance._shieldDurationLeft = 0;
 
                     EventManagers.Instance.InvokeOnShieldLoss();
+                    SFXManager.Instance.PlayPowerupDepletedSFX();
                 } else {
                     PlayerStates.Instance._shieldDurationLeft -= Time.deltaTime;
                 }
@@ -80,6 +81,7 @@ namespace InfiniteRunner {
                     PlayerStates.Instance._scoreMultiplierDurationLeft = 0;
 
                     EventManagers.Instance.InvokeOnScoreMultiplierLoss();
+                    SFXManager.Instance.PlayPowerupDepletedSFX();
                 } else {
                     PlayerStates.Instance._scoreMultiplierDurationLeft -= Time.deltaTime;
                 }

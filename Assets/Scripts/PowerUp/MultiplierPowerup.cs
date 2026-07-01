@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 namespace InfiniteRunner {
-    public class Shield : MonoBehaviour {
+    public class MultiplierPowerup : MonoBehaviour {
 
         private void Update() {
             if (PlayerStates.Instance._isGameOver) {
@@ -15,10 +15,11 @@ namespace InfiniteRunner {
 
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.CompareTag("Player")) {
-                EventManagers.Instance.InvokeOnShieldCollect();
+                EventManagers.Instance.InvokeOnScoreMultiplierCollect();
+                SFXManager.Instance.PlayPowerUpCollectSFX();
 
-                PlayerStates.Instance._isShielded = true;
-                PlayerStates.Instance._shieldDurationLeft = PlayerStates.Instance._shieldDuration;
+                PlayerStates.Instance._isScoreMultiplied = true;
+                PlayerStates.Instance._scoreMultiplierDurationLeft = PlayerStates.Instance._scoreMultiplierDuration;
 
                 Destroy(gameObject);
             }

@@ -72,9 +72,13 @@ namespace InfiniteRunner {
                     if (moveX < 0f) {
                         _currentLane = Mathf.Max(0, _currentLane - 1);
                         _animator.SetInteger("MoveDirection", -1);
+                        
+                        SFXManager.Instance.PlayChangeLanesSFX();
                     } else {
                         _currentLane = Mathf.Min(2, _currentLane + 1);
                         _animator.SetInteger("MoveDirection", 1);
+
+                        SFXManager.Instance.PlayChangeLanesSFX();
                     }
 
                     _moveHeld = true;
@@ -89,16 +93,19 @@ namespace InfiniteRunner {
             if (_isGrounded) 
             {
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-                PlayerStates.Instance._isJumping = true;
                 _animator.SetBool("JumpBool", true);
+
+                PlayerStates.Instance._isJumping = true;
+                SFXManager.Instance.PlayJumpSFX();
             }
         }
         public void HandleSlideInput() {
             if (_isGrounded) {
-                SetColliderToSlide();
+                SetColliderToSlide();                
+                _animator.SetBool("SlideBool", true);
 
                 PlayerStates.Instance._isSliding = true;
-                _animator.SetBool("SlideBool", true);
+                SFXManager.Instance.PlaySlideSFX();
             }
         }
         private void CheckGrounded() {

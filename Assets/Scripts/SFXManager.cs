@@ -6,11 +6,29 @@ namespace InfiniteRunner
         public static SFXManager Instance { get; private set; }
         
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioSource _loopedAudioSource;
 
         [Header("CoinCollectSFX")]
         [SerializeField] private AudioClip _coinCollectSFX;
         [SerializeField] private float _pitchMultiplier;
         [SerializeField] private float _timeElapsedThreshold;
+
+        [Header("Player SFX")]
+        [SerializeField] private AudioClip _jumpSFX;
+        [SerializeField] private AudioClip _slideSFX;
+        [SerializeField] private AudioClip _runningSFX;
+        [SerializeField] private AudioClip _deathSFX;
+        [SerializeField] private AudioClip _changeLanesSFX;
+
+        [Header("Powerup SFX")]
+        [SerializeField] private AudioClip _boughtUpgradesSFX;
+        [SerializeField] private AudioClip _buyErrorSFX;
+        [SerializeField] private AudioClip _powerupCollectSFX;
+        [SerializeField] private AudioClip _powerupDepletedSFX;
+
+        [Header("UI SFX")]
+        [SerializeField] private AudioClip _buttonClickHoverSFX;
+        
 
         private float _lastTimeCoinCollected = -999999f;
 
@@ -50,6 +68,27 @@ namespace InfiniteRunner
             _audioSource.pitch = pitch;
             _audioSource.PlayOneShot(_coinCollectSFX);
         }
+
+        //player sfx
+        private void PlayRunSFX(){
+            _loopedAudioSource.clip = _runningSFX;
+            _loopedAudioSource.Play();
+        }
+
+        public void PlayJumpSFX(){_audioSource.PlayOneShot(_jumpSFX);}
+        public void PlaySlideSFX(){_audioSource.PlayOneShot(_slideSFX);}
+        public void PlayDeathSFX(){_audioSource.PlayOneShot(_deathSFX);}
+        public void PlayChangeLanesSFX(){_audioSource.PlayOneShot(_changeLanesSFX);}
+
+        //powerup sfx
+        public void PlayBoughtUpgradeSFX(){_audioSource.PlayOneShot(_boughtUpgradesSFX);}
+        public void PlayBuyErrorSFX(){_audioSource.PlayOneShot(_buyErrorSFX);}
+        public void PlayPowerUpCollectSFX(){_audioSource.PlayOneShot(_powerupCollectSFX);}
+        public void PlayPowerupDepletedSFX(){_audioSource.PlayOneShot(_powerupDepletedSFX);}
+
+        //ui sfx
+        public void PlayClickHoverSFX(){_audioSource.PlayOneShot(_buttonClickHoverSFX);}
+        
     }
 
 }

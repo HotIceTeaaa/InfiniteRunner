@@ -26,7 +26,7 @@ namespace InfiniteRunner
 
         public void PlayGameplayBGM()
         {
-            _audioSource.volume = 0.8f;
+            _audioSource.volume = 0.3f;
             _audioSource.Play();
         }
     }

@@ -61,5 +61,10 @@ namespace InfiniteRunner
             float lvl = PlayerPrefs.GetInt("scoreMultiplierLevel", 1);
             Debug.Log(lvl);
         }
+
+        [ContextMenu("Set Coins 1000")]
+        public void SetCoins1000() {
+            PlayerPrefs.SetInt("coins", 1000);
+        }
     }
 }

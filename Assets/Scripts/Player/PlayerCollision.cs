@@ -10,10 +10,12 @@ namespace InfiniteRunner {
                     PlayerStates.Instance._shieldDurationLeft = 0f;
 
                     EventManagers.Instance.InvokeOnShieldLoss();
+                    SFXManager.Instance.PlayPowerupDepletedSFX();
 
                     Destroy(other.gameObject);
                 } else {
                     GameManager.Instance.GameOver();
+                    SFXManager.Instance.PlayDeathSFX();
                 }
             }
         }

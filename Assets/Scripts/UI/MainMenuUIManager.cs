@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +11,17 @@ namespace InfiniteRunner
         [SerializeField] private GameObject _tutorialPanel;
         [SerializeField] private Upgrades _upgradeScript;
 
-        [Header("ShieldLevelImageUI")]
+        [Header("ShieldLevelUI")]
         [SerializeField] private Image _level2ShieldImage;
         [SerializeField] private Image _level3ShieldImage;
+        [SerializeField] private GameObject _shieldUpgrade;
+        [SerializeField] private GameObject _maxShield;
 
-        [Header("ScoreMultiplierLevelImageUI")]
+        [Header("ScoreMultiplierLevelUI")]
         [SerializeField] private Image _level2ScoreMultiplierImage;
         [SerializeField] private Image _level3ScoreMultiplierImage;
+        [SerializeField] private GameObject _scoreMultiplierUpgrade;
+        [SerializeField] private GameObject _maxScoreMultiplier;
 
         private void Awake() {
             // Enforce the Singleton pattern
@@ -61,6 +66,11 @@ namespace InfiniteRunner
             if (res)
             {
                 HandleShieldLevelUI();
+                SFXManager.Instance.PlayBoughtUpgradeSFX();
+            }
+            else
+            {
+                SFXManager.Instance.PlayBuyErrorSFX();
             }
         }
 
@@ -71,6 +81,11 @@ namespace InfiniteRunner
             if (res)
             {
                 HandleScoreMultiplierLevelUI();
+                SFXManager.Instance.PlayBoughtUpgradeSFX();
+            }
+            else
+            {
+                SFXManager.Instance.PlayBuyErrorSFX();
             }
         }
 
@@ -81,11 +96,25 @@ namespace InfiniteRunner
             if(level >= 2)
             {
                 _level2ShieldImage.enabled = true;
+
+                //ganti opacitynya
+                Color color = _level2ShieldImage.color;
+                color.a = 1;
+                _level2ShieldImage.color = color;
             }
 
             if(level >= 3)
             {
                 _level3ShieldImage.enabled = true;
+
+                //ganti opacitynya
+                Color color = _level3ShieldImage.color;
+                color.a = 1;
+                _level3ShieldImage.color = color;
+
+                //ganti tombol jadi image MAX
+                _shieldUpgrade.SetActive(false);
+                _maxShield.SetActive(true);
             }
         }
 
@@ -96,12 +125,31 @@ namespace InfiniteRunner
             if(level >= 2)
             {
                 _level2ScoreMultiplierImage.enabled = true;
+
+                //ganti opacitynya
+                Color color = _level2ScoreMultiplierImage.color;
+                color.a = 1;
+                _level2ScoreMultiplierImage.color = color;
             }
 
             if(level >= 3)
             {
                 _level3ScoreMultiplierImage.enabled = true;
+
+                //ganti opacitynya
+                Color color = _level3ScoreMultiplierImage.color;
+                color.a = 1;
+                _level3ScoreMultiplierImage.color = color;
+
+                //ganti tombol jadi image MAX
+                _scoreMultiplierUpgrade.SetActive(false);
+                _maxScoreMultiplier.SetActive(true);
             }
+        }
+
+        public void DelegateButtonSFXToManager()
+        {
+            SFXManager.Instance.PlayClickHoverSFX();
         }
     }
 
