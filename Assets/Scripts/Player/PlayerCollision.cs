@@ -15,7 +15,9 @@ namespace InfiniteRunner {
                     Destroy(other.gameObject);
                 } else {
                     GameManager.Instance.GameOver();
+
                     SFXManager.Instance.PlayDeathSFX();
+                    SFXManager.Instance.MuteRunSFX();       // perlu di mute krn meski udh _isGrounded == false, script player controller g jalan di scene main menu. 
                 }
             }
         }

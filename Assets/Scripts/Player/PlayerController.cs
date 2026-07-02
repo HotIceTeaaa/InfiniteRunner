@@ -26,7 +26,6 @@ namespace InfiniteRunner {
         private Rigidbody _rigidbody;
         private int _currentLane = 1;
         private float _targetLaneX;
-        private bool _isGrounded;
         private bool _moveHeld;   // was the stick pushed sideways last frame?
 
         // untuk ukuran collider pas sliding/berdiri
@@ -90,7 +89,7 @@ namespace InfiniteRunner {
         }
 
         public void HandleJumpInput() {
-            if (_isGrounded) 
+            if (PlayerStates.Instance._isGrounded) 
             {
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
                 _animator.SetBool("JumpBool", true);
@@ -100,7 +99,7 @@ namespace InfiniteRunner {
             }
         }
         public void HandleSlideInput() {
-            if (_isGrounded) {
+            if (PlayerStates.Instance._isGrounded) {
                 SetColliderToSlide();                
                 _animator.SetBool("SlideBool", true);
 
@@ -109,12 +108,22 @@ namespace InfiniteRunner {
             }
         }
         private void CheckGrounded() {
-            _isGrounded = Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, _groundLayer);
+            PlayerStates.Instance._isGrounded = Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, _groundLayer);
 
-            if(_isGrounded && PlayerStates.Instance._isJumping) {
-                PlayerStates.Instance._isJumping = false;
-                _animator.SetBool("JumpBool", false);
+            if (PlayerStates.Instance._isGrounded)
+            {
+                SFXManager.Instance.PlayRunSFX();
+                
+                if (PlayerStates.Instance._isJumping)
+                {
+                    PlayerStates.Instance._isJumping = false;
+                    _animator.SetBool("JumpBool", false);
+                }
             }
+            else
+            {
+                SFXManager.Instance.MuteRunSFX();
+            }   
         }
 
         private void MoveToLane() {

@@ -16,7 +16,7 @@ namespace InfiniteRunner
         [Header("Player SFX")]
         [SerializeField] private AudioClip _jumpSFX;
         [SerializeField] private AudioClip _slideSFX;
-        [SerializeField] private AudioClip _runningSFX;
+        //[SerializeField] private AudioClip _runningSFX; running clip langsung di reference di looped audio source
         [SerializeField] private AudioClip _deathSFX;
         [SerializeField] private AudioClip _changeLanesSFX;
 
@@ -70,13 +70,10 @@ namespace InfiniteRunner
         }
 
         //player sfx
-        private void PlayRunSFX(){
-            _loopedAudioSource.clip = _runningSFX;
-            _loopedAudioSource.Play();
-        }
-
+        public void PlayRunSFX(){_loopedAudioSource.mute = false;}
+        public void MuteRunSFX(){_loopedAudioSource.mute = true;}
         public void PlayJumpSFX(){_audioSource.PlayOneShot(_jumpSFX);}
-        public void PlaySlideSFX(){_audioSource.PlayOneShot(_slideSFX);}
+        public void PlaySlideSFX(){/*g nemu sfx slide yg bagus jadi di remove*/}
         public void PlayDeathSFX(){_audioSource.PlayOneShot(_deathSFX);}
         public void PlayChangeLanesSFX(){_audioSource.PlayOneShot(_changeLanesSFX);}
 

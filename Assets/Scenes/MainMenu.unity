@@ -157,14 +157,13 @@ MonoBehaviour:
   _timeElapsedThreshold: 0.2
   _jumpSFX: {fileID: 8300000, guid: a09d263a0f9f57c48917177975717a09, type: 3}
   _slideSFX: {fileID: 8300000, guid: 1d9fdb4f33c18fa4f8cbcd25949d77f1, type: 3}
-  _runningSFX: {fileID: 8300000, guid: b9b567e94a4d67742973ab489680e2fd, type: 3}
   _deathSFX: {fileID: 8300000, guid: f46e09a9efad5714ea297baf6ecceb37, type: 3}
   _changeLanesSFX: {fileID: 8300000, guid: 96f37fbb5a2f8024ab0917448d6335f9, type: 3}
   _boughtUpgradesSFX: {fileID: 8300000, guid: a07570e219d9cea4db04929388e76f5d, type: 3}
   _buyErrorSFX: {fileID: 8300000, guid: 641762ac1a063a94e8749bd7976a08d9, type: 3}
   _powerupCollectSFX: {fileID: 8300000, guid: f2e43a4a9080ecc41a00168ef67958f6, type: 3}
   _powerupDepletedSFX: {fileID: 8300000, guid: 76776daba53ebaf41aa327e6e89c11a3, type: 3}
-  _buttonClickHoverSFX: {fileID: 8300000, guid: 88d6a9ba7eb73494d9191767fe52ae55, type: 3}
+  _buttonClickHoverSFX: {fileID: 8300000, guid: cedb03e17da7d5247bc13c9c041d1d88, type: 3}
 --- !u!82 &23740965
 AudioSource:
   m_ObjectHideFlags: 0
@@ -288,12 +287,12 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_Resource: {fileID: 8300000, guid: b9b567e94a4d67742973ab489680e2fd, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -1575,6 +1574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteRunner.PlayerStates
   _isJumping: 0
   _isSliding: 0
+  _isGrounded: 1
   _isGameOver: 0
   _isGameStart: 0
   _isShielded: 0

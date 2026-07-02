@@ -78,9 +78,7 @@ namespace InfiniteRunner {
 
         private GameObject CreateNew(GameObject prefab) {
             GameObject obj = Instantiate(prefab, transform);
-
             obj.SetActive(false);
-
             return obj;
         }
     }

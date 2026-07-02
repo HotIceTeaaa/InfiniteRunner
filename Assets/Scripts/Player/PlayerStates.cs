@@ -7,6 +7,7 @@ namespace InfiniteRunner {
         [Header("Player States")]
         public bool _isJumping = false;
         public bool _isSliding = false;
+        public bool _isGrounded = false;
 
         [Header("Game States")]
         public bool _isGameOver = false;
@@ -98,6 +99,7 @@ namespace InfiniteRunner {
         {
             _isJumping = false;
             _isSliding = false;
+            _isGrounded = false;
 
             _isShielded = false;
             _shieldDurationLeft = 0;
