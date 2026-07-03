@@ -9,7 +9,7 @@ namespace InfiniteRunner {
             if (other.gameObject.CompareTag("Player")) {
                 OnCollect.Invoke();
 
-                PoolManager.Instance.Return(PoolType.Coin, gameObject);
+                Destroy(gameObject);
             }
         }
     }

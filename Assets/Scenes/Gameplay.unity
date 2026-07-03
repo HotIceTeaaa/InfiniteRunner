@@ -4713,6 +4713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236b5c099de4dbb478cd5664efd639d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _coinContainerPrefab: {fileID: 8225231277897704274, guid: 9a9da62914f42a549be1745971c8180d, type: 3}
   _coinContainerSpawnTransforms:
   - {fileID: 7447140082134022379}
   - {fileID: 6541603936004501559}

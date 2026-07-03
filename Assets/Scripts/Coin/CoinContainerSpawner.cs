@@ -5,6 +5,7 @@ using UnityEngine;
 namespace InfiniteRunner {
     public class CoinSpawner : MonoBehaviour {
         [Header("For Summoning Coin Containers")]
+        [SerializeField] private GameObject _coinContainerPrefab;
         [SerializeField] private Transform[] _coinContainerSpawnTransforms;
         [SerializeField] private float _spawnRate;
         [SerializeField] private float _spawnThreshold;
@@ -27,18 +28,10 @@ namespace InfiniteRunner {
                 float spawnProbabilities = Random.value;
 
                 if (spawnProbabilities < _spawnThreshold) {
-                    GameObject coinContainer = PoolManager.Instance.GetAndSetPositionRotation(PoolType.CoinContainer, _coinContainerSpawnTransforms[i].position, Quaternion.identity);
+                    GameObject coinContainer = Instantiate(_coinContainerPrefab, _coinContainerSpawnTransforms[i].position, Quaternion.identity);
 
-                    StartCoroutine(ReturnAfter(PoolType.CoinContainer, coinContainer, _lifeTime));
+                    Destroy(coinContainer, _lifeTime);
                 }
-            }
-        }
-
-        private IEnumerator ReturnAfter(PoolType type, GameObject obj, float lifespan) {
-            yield return new WaitForSeconds(lifespan);
-
-            if (obj.activeSelf) {
-                PoolManager.Instance.Return(type, obj);
             }
         }
 

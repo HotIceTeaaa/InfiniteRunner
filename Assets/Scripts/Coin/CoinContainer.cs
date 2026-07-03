@@ -5,6 +5,7 @@ namespace InfiniteRunner
 {
     public class CoinContainer : MonoBehaviour
     {
+        [SerializeField] private GameObject _coinPrefab;
         [SerializeField] private Transform[] _coinRowTransforms; 
         [SerializeField] private Transform[] _coinArchTransforms; 
         [SerializeField] private float _coinsLifetime; 
@@ -33,9 +34,10 @@ namespace InfiniteRunner
         {
             for(int i = 0; i < _coinRowTransforms.Length; i++)
             {
-                GameObject coin = PoolManager.Instance.GetAndSetPositionRotation(PoolType.Coin, _coinRowTransforms[i].position, Quaternion.identity, gameObject);
+                GameObject coin = Instantiate(_coinPrefab, _coinRowTransforms[i].position, Quaternion.identity);
+                coin.transform.parent = gameObject.transform;
 
-                StartCoroutine(ReturnAfter(PoolType.Coin, coin, _coinsLifetime));
+                Destroy(coin, _coinsLifetime);
             }
         }
 
@@ -43,17 +45,10 @@ namespace InfiniteRunner
         {
             for(int i = 0; i < _coinArchTransforms.Length; i++)
             {
-                GameObject coin = PoolManager.Instance.GetAndSetPositionRotation(PoolType.Coin, _coinArchTransforms[i].position, Quaternion.identity, gameObject);
+                GameObject coin = Instantiate(_coinPrefab, _coinArchTransforms[i].position, Quaternion.identity);
+                coin.transform.parent = gameObject.transform;
 
-                StartCoroutine(ReturnAfter(PoolType.Coin, coin, _coinsLifetime));
-            }
-        }
-
-        private IEnumerator ReturnAfter(PoolType type, GameObject obj, float lifespan) {
-            yield return new WaitForSeconds(lifespan);
-
-            if (obj.activeSelf) {
-                PoolManager.Instance.Return(type, obj);
+                Destroy(coin, _coinsLifetime);
             }
         }
 
