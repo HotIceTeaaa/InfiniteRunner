@@ -22892,7 +22892,7 @@ MonoBehaviour:
   _scoreIncrements: 10
   _scoreMultiplier: 2
   _speed: 8
-  _increaseSpeedBy: 0.1
+  _increaseSpeedBy: 0.5
   _increaseSpeedCount: 0
   _increaseSpeedEveryScore: 10000
   coinsCollectedThisRound: 0
