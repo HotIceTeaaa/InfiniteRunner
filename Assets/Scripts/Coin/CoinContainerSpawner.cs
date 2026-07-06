@@ -28,6 +28,9 @@ namespace InfiniteRunner {
 
                 if (spawnProbabilities < _spawnThreshold) {
                     GameObject coinContainer = PoolManager.Instance.GetAndSetPositionRotation(PoolType.CoinContainer, _coinContainerSpawnTransforms[i].position, Quaternion.identity);
+                    
+                    CoinContainer coinContainerScript = coinContainer.GetComponent<CoinContainer>();
+                    coinContainerScript.Initialize();
 
                     StartCoroutine(ReturnAfter(PoolType.CoinContainer, coinContainer, _lifeTime));
                 }

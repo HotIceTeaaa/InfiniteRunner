@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 namespace InfiniteRunner
 {
@@ -7,14 +8,9 @@ namespace InfiniteRunner
     {
         [SerializeField] private Transform[] _coinRowTransforms; 
         [SerializeField] private Transform[] _coinArchTransforms; 
-        [SerializeField] private float _coinsLifetime; 
+        [SerializeField] private float _coinsLifetime;
 
-        private void Awake()
-        {
-            Initialize();
-        }
-
-        private void Initialize()
+        public void Initialize()
         {
             int type = Random.Range(0, 2);
 
@@ -31,7 +27,7 @@ namespace InfiniteRunner
 
         private void InitCoinRow()
         {
-            for(int i = 0; i < _coinRowTransforms.Length; i++)
+            for (int i = 0; i < _coinRowTransforms.Length; i++)
             {
                 GameObject coin = PoolManager.Instance.GetAndSetPositionRotation(PoolType.Coin, _coinRowTransforms[i].position, Quaternion.identity, gameObject);
 
@@ -41,7 +37,8 @@ namespace InfiniteRunner
 
         private void InitCoinArch()
         {
-            for(int i = 0; i < _coinArchTransforms.Length; i++)
+
+            for (int i = 0; i < _coinArchTransforms.Length; i++)
             {
                 GameObject coin = PoolManager.Instance.GetAndSetPositionRotation(PoolType.Coin, _coinArchTransforms[i].position, Quaternion.identity, gameObject);
 
@@ -49,6 +46,7 @@ namespace InfiniteRunner
             }
         }
 
+        //co routine g jalan kalo objeknya disable
         private IEnumerator ReturnAfter(PoolType type, GameObject obj, float lifespan) {
             yield return new WaitForSeconds(lifespan);
 

@@ -29,7 +29,7 @@ namespace InfiniteRunner {
 
             Instance = this;
 
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             // prewarm shelf
             for (int i = 0; i < _coinCount; i++) {

@@ -6321,54 +6321,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3922362735663448511, guid: a4c73f91703f6b34f9bd38ff6eeda3df, type: 3}
   m_PrefabInstance: {fileID: 1556300789}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1578541747
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1578541749}
-  - component: {fileID: 1578541748}
-  m_Layer: 0
-  m_Name: PoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1578541748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578541747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1648d2a3f51b3409684683db322dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InfiniteRunner.PoolManager
-  _coinPrefab: {fileID: 2407429299807806073, guid: e514ec6c4f2e1404980b40c081913e3e, type: 3}
-  _coinCount: 100
-  _coinContainerPrefab: {fileID: 8225231277897704274, guid: 9a9da62914f42a549be1745971c8180d, type: 3}
-  _coinContainerCount: 10
---- !u!4 &1578541749
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578541747}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598264836
 GameObject:
   m_ObjectHideFlags: 0
@@ -8615,7 +8567,6 @@ SceneRoots:
   - {fileID: 1497609045}
   - {fileID: 23740966}
   - {fileID: 1184128405}
-  - {fileID: 1578541749}
   - {fileID: 1736828877}
   - {fileID: 2107049742}
   - {fileID: 1332555967}
